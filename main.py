@@ -85,5 +85,5 @@ end_date = datetime.date(2017, 6, 25)
 
 gui = Gui(page=section_1+section_2+section_3)
 
-gui.run(title='Taipy GUI Video 2',
+gui.run(title='Taipy Demo GUI 2',
         dark_mode=False)
