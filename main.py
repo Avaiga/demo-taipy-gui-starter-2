@@ -2,8 +2,11 @@ from taipy.gui import Gui, notify
 import pandas as pd
 import webbrowser
 import datetime
+import os
 
-section_1="""
+DOWNLOAD_PATH = "download.csv"
+
+section_1 = """
 <center>
 <|navbar|lov={[("page1", "This Page"), ("https://docs.taipy.io/en/latest/manuals/about/", "Taipy Docs"), ("https://docs.taipy.io/en/latest/getting_started/", "Getting Started")]}|>
 </center>
@@ -12,22 +15,22 @@ Data Dashboard with Taipy
 =========================
 <|layout|columns=1 3|
 <|
-###let's create a simple Data Dashboard!
+### Let's create a simple Data Dashboard!
 <br/> 
 <center>
-<|file_selector|label=Upload Dataset|>
+    <|file_selector|label=Upload Dataset|>
 </center>
 |>
 <|
 <center>
-<|{logo}|image|height=250px|width=250px|on_action=image_action|>
+    <|{logo}|image|height=250px|width=250px|on_action=image_action|>
 </center>
 |>
 |>
 """
 
 section_2 = """
-##Data Visualization
+## Data Visualization
 <|{dataset}|chart|mode=lines|x=Date|y[1]=MinTemp|y[2]=MaxTemp|color[1]=blue|color[2]=red|>
 """
 
@@ -43,10 +46,9 @@ section_3 = """
 <|button|label=GO|on_action=button_action|>
 |>
 <|
-<center> <h2>Dataset</h2><|{download_data}|file_download|on_action=download|>
-</center>
 <center>
-<|{dataset}|table|page_size=10|height=500px|width=65%|>
+    <h2>Dataset</h2><|{DOWNLOAD_PATH}|file_download|on_action=download|>
+    <|{dataset}|table|page_size=10|height=500px|width=65%|>
 </center>
 |>
 |>
@@ -74,12 +76,22 @@ def button_action(state):
     notify(state, "info", "Updated date range from {} to {}.".format(state.start_date.strftime("%m/%d/%Y"), state.end_date.strftime("%m/%d/%Y")))
 
 def download(state):
-    state.dataset.to_csv('download.csv')
-    state.download_data = 'download.csv'
+    state.dataset.to_csv(DOWNLOAD_PATH)
 
 logo = "images/taipy_logo.jpg"
 dataset = get_data("datasets/weather.csv")
 start_date = datetime.date(2008, 12, 1)
 end_date = datetime.date(2017, 6, 25)
 
-Gui(page=section_1+section_2+section_3).run(dark_mode=False)
+gui = Gui(page=section_1+section_2+section_3)
+
+if __name__ == '__main__':
+    # the options in the gui.run() are optional, try without them
+    gui.run(title='Taipy GUI Video 1',
+    		host='0.0.0.0',
+    		port=os.environ.get('PORT', '5050'),
+    		dark_mode=False)
+else:
+    app = gui.run(title='Taipy GUI Video 1',
+                  dark_mode=False,
+                  run_server=False)
