@@ -33,9 +33,7 @@ This video is designed to be the first of a series of tutorials to build the afo
 
 ## Directory Structure
 
-- `demo-taipy-gui-starter-2/`:
-    - `src/`: Contains the demo source code.
-    - `tests/`: Contains the demo tests.
+- `src/`: Contains the demo source code.
 - `CODE_OF_CONDUCT.md`: Code of conduct for members and contributors of _demo-taipy-gui-starter-2_.
 - `CONTRIBUTING.md`: Instructions to contribute to _demo-taipy-gui-starter-2_.
 - `INSTALLATION.md`: Instructions to install _demo-taipy-gui-starter-2_.
