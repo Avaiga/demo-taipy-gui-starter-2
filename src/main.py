@@ -5,6 +5,7 @@ import datetime
 import os
 
 DOWNLOAD_PATH = "data/download.csv"
+upload_file = None
 
 section_1 = """
 <center>
@@ -18,7 +19,7 @@ Data Dashboard with Taipy
 ### Let's create a simple Data Dashboard!
 <br/> 
 <center>
-    <|file_selector|label=Upload Dataset|>
+    <|{upload_file}|file_selector|label=Upload Dataset|>
 </center>
 |>
 <|
