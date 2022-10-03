@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 toml = "==0.10"
-taipy = "==1.0"
+taipy = "==2.0"
 
 
 [dev-packages]
